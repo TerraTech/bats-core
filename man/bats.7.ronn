@@ -110,6 +110,20 @@ Or you can skip conditionally:
     }
 
 
+THE STOP_ON_FAILURE COMMAND
+---------------------------
+
+Tests can be stopped at first failure by using the `stop_on_failure` command
+within the global context.
+
+NOTE: Will not work within the context of a test due to separate execution environments.
+
+example:
+
+    #!/usr/bin/env bats
+    stop_on_failure
+    [...]
+
 SETUP AND TEARDOWN FUNCTIONS
 ----------------------------
 
