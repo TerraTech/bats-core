@@ -71,6 +71,11 @@ skip() {
   exit 0
 }
 
+BATS_STOP_ON_FAILURE=''
+stop_on_failure() {
+  BATS_STOP_ON_FAILURE=1
+}
+
 bats_test_begin() {
   BATS_TEST_DESCRIPTION="$1"
   if [[ -n "$BATS_EXTENDED_SYNTAX" ]]; then
@@ -317,6 +322,9 @@ bats_perform_tests() {
     if ! "$0" $BATS_EXTENDED_SYNTAX "$BATS_TEST_FILENAME" "$test_name" \
       "$test_number"; then
       status=1
+      if [[ "$BATS_STOP_ON_FAILURE" -eq 1 ]]; then
+        break
+      fi
     fi
     let test_number+=1
   done
